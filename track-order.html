@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Track Order | Al Fajr Restaurant</title>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+
+<style>
+
+
+body{
+
+background:#111;
+
+color:white;
+
+font-family:Arial,sans-serif;
+
+}
+
+
+
+.navbar{
+
+background:#000 !important;
+
+}
+
+
+
+.navbar-brand{
+
+font-size:24px;
+
+letter-spacing:1px;
+
+}
+
+
+
+.nav-link{
+
+color:white !important;
+
+}
+
+
+
+.nav-link:hover,
+.nav-link.active{
+
+color:#ffc107 !important;
+
+}
+
+
+
+.gold{
+
+color:#ffc107;
+
+}
+
+
+
+
+
+.track-title{
+
+font-size:45px;
+
+font-weight:bold;
+
+text-align:center;
+
+margin:50px 0;
+
+}
+
+
+
+
+
+.track-box{
+
+
+max-width:750px;
+
+
+margin:auto;
+
+
+background:#1b1b1b;
+
+
+border:1px solid #ffc107;
+
+
+padding:35px;
+
+
+border-radius:20px;
+
+
+box-shadow:0 10px 30px rgba(255,193,7,0.2);
+
+
+transition:0.3s;
+
+
+}
+
+
+
+.track-box:hover{
+
+
+transform:translateY(-5px);
+
+
+}
+
+
+
+
+
+.form-control{
+
+
+background:#222;
+
+
+border:1px solid #555;
+
+
+color:white;
+
+
+}
+
+
+
+.form-control:focus{
+
+
+background:#222;
+
+
+color:white;
+
+
+border-color:#ffc107;
+
+
+box-shadow:none;
+
+
+}
+
+
+
+.form-control::placeholder{
+
+color:#aaa;
+
+}
+
+
+
+
+
+.btn-gold{
+
+
+background:#ffc107;
+
+
+color:#000;
+
+
+font-weight:bold;
+
+
+border-radius:30px;
+
+
+padding:12px;
+
+
+}
+
+
+
+.btn-gold:hover{
+
+
+background:#ffda6a;
+
+
+}
+
+
+
+
+
+.order-card{
+
+
+background:#222;
+
+
+border:1px solid #ffc107;
+
+
+border-radius:20px;
+
+
+padding:25px;
+
+
+margin-top:20px;
+
+
+}
+
+
+
+
+.status-badge{
+
+
+padding:8px 20px;
+
+
+border-radius:25px;
+
+
+font-weight:bold;
+
+
+}
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+
+<!-- NAVBAR -->
+
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+
+
+<div class="container">
+
+
+
+<a class="navbar-brand d-flex align-items-center" href="index.html">
+
+
+<img src="images/logo.png"
+
+width="45"
+
+height="45"
+
+class="me-2 rounded-circle">
+
+
+
+<span class="fw-bold text-warning">
+
+AL FAJR RESTAURANT
+
+</span>
+
+
+</a>
+
+
+
+
+
+
+
+<button class="navbar-toggler"
+
+type="button"
+
+data-bs-toggle="collapse"
+
+data-bs-target="#navbarNav">
+
+
+<span class="navbar-toggler-icon"></span>
+
+
+</button>
+
+
+
+
+
+
+<div class="collapse navbar-collapse"
+
+id="navbarNav">
+
+
+
+<ul class="navbar-nav ms-auto">
+
+
+
+<li class="nav-item">
+
+<a class="nav-link" href="index.html">
+
+Home
+
+</a>
+
+</li>
+
+
+
+
+<li class="nav-item">
+
+<a class="nav-link" href="menu.html">
+
+Menu
+
+</a>
+
+</li>
+
+
+
+
+<li class="nav-item">
+
+<a class="nav-link" href="about.html">
+
+About
+
+</a>
+
+</li>
+
+
+
+
+<li class="nav-item">
+
+<a class="nav-link" href="contact.html">
+
+Contact
+
+</a>
+
+</li>
+
+
+
+
+<li class="nav-item">
+
+<a class="nav-link" href="cart.html">
+
+🛒 Cart
+
+</a>
+
+</li>
+
+
+
+
+<li class="nav-item">
+
+<a class="nav-link active" href="track-order.html">
+
+📦 Track Order
+
+</a>
+
+</li>
+
+
+
+
+</ul>
+
+
+</div>
+
+
+
+</div>
+
+
+</nav>
+
+
+
+
+
+
+
+
+<h1 class="track-title">
+
+Track Your <span class="gold">Order</span> 📦
+
+</h1>
+
+
+
+
+
+
+
+<div class="track-box">
+
+
+<input type="text"
+
+id="orderId"
+
+class="form-control mb-3"
+
+placeholder="Enter Order ID">
+
+
+
+
+
+<button class="btn btn-gold w-100"
+
+onclick="trackOrder()">
+
+
+Track Order 🔍
+
+
+</button>
+
+
+
+
+
+<div id="result" class="mt-4">
+
+</div>
+
+
+
+</div>
+
+<script>
+
+
+async function trackOrder(){
+
+
+
+let id = document.getElementById("orderId").value;
+
+
+let result = document.getElementById("result");
+
+
+
+
+
+if(!id){
+
+
+result.innerHTML = `
+
+
+<div class="alert alert-warning text-center">
+
+Please Enter Order ID ⚠️
+
+</div>
+
+
+`;
+
+
+return;
+
+
+}
+
+
+
+
+
+
+
+try{
+
+
+
+let response = await fetch(
+
+"http://localhost:5000/orders/"+id
+
+);
+
+
+
+
+
+
+if(!response.ok){
+
+
+throw new Error("Not Found");
+
+
+}
+
+
+
+
+
+
+
+let order = await response.json();
+
+
+
+
+
+let statusClass = "bg-warning text-dark";
+
+
+
+if(order.status === "Preparing"){
+
+
+statusClass="bg-info text-dark";
+
+
+}
+
+
+
+else if(order.status === "Delivered"){
+
+
+statusClass="bg-success text-white";
+
+
+}
+
+
+
+
+
+
+
+
+result.innerHTML = `
+
+
+
+<div class="order-card">
+
+
+
+
+
+<h4 class="gold">
+
+Customer Details 👤
+
+</h4>
+
+
+
+
+<p>
+
+<b>Name:</b> ${order.customerName}
+
+</p>
+
+
+
+<p>
+
+<b>Phone:</b> ${order.customerPhone}
+
+</p>
+
+
+
+
+
+<hr>
+
+
+
+
+
+
+<h4 class="gold">
+
+Order Details 🍔
+
+</h4>
+
+
+
+
+
+
+<p>
+
+${order.items.map(
+
+item => item.name+" x "+item.quantity
+
+).join("<br>")}
+
+</p>
+
+
+
+
+
+
+<h4>
+
+Total:
+
+<span class="gold">
+
+Rs.${order.total}
+
+</span>
+
+</h4>
+
+
+
+
+
+
+
+<h4 class="mt-3">
+
+Status:
+
+<span class="status-badge ${statusClass}">
+
+${order.status}
+
+</span>
+
+
+</h4>
+
+
+
+
+
+</div>
+
+
+
+`;
+
+
+
+
+
+}
+
+
+
+catch(error){
+
+
+
+result.innerHTML = `
+
+
+
+<div class="alert alert-danger text-center">
+
+Order Not Found ❌
+
+</div>
+
+
+`;
+
+
+
+}
+
+
+
+}
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+
+<footer class="bg-dark text-white text-center py-4 mt-5">
+
+
+<img src="images/logo.png"
+
+width="60"
+
+height="60"
+
+class="rounded-circle mb-2">
+
+
+
+
+
+<h4 class="text-warning">
+
+🍔 AL FAJR RESTAURANT
+
+</h4>
+
+
+
+
+<p>
+
+Fresh Food • Fast Delivery
+
+</p>
+
+
+
+
+
+<p>
+
+📞 0300-0000000
+
+<br>
+
+📍 Hyderabad
+
+</p>
+
+
+
+
+
+<hr class="mx-5">
+
+
+
+
+
+<p class="mb-0">
+
+© 2026 Al Fajr Restaurant. All Rights Reserved.
+
+</p>
+
+
+
+</footer>
+
+
+
+
+
+</body>
+
+</html>

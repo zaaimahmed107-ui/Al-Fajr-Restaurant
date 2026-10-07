@@ -1,0 +1,861 @@
+/* ==========================
+   Global Styles
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:#2d0b0b;
+    color:#fff;
+    line-height:1.6;
+}
+
+img{
+    max-width:100%;
+    height:auto;
+    display:block;
+}
+
+/* ==========================
+   Navbar
+========================== */
+
+.navbar{
+    background:#1b0505 !important;
+}
+
+.navbar-brand{
+    color:gold !important;
+    font-weight:bold;
+}
+
+.navbar-nav .nav-link{
+    color:#fff !important;
+    font-size:18px;
+    transition:.3s;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active{
+    color:gold !important;
+}
+
+/* ==========================
+   Buttons
+========================== */
+
+button,
+.btn{
+    border-radius:8px;
+    transition:.3s;
+}
+
+button:hover,
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+/* ==========================
+   Hero Section
+========================== */
+
+.hero{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:60px;
+    min-height:80vh;
+}
+
+.hero-text{
+    width:50%;
+}
+
+.hero-text h1{
+    font-size:55px;
+    color:gold;
+    margin-bottom:20px;
+}
+
+.hero-text p{
+    font-size:22px;
+    margin-bottom:30px;
+}
+
+.hero-image{
+    width:50%;
+    text-align:center;
+}
+
+.hero-image img{
+    width:450px;
+}
+
+/* ==========================
+   Menu Section
+========================== */
+
+.menu{
+    padding:80px 50px;
+    text-align:center;
+}
+
+.menu h2{
+    font-size:40px;
+    color:gold;
+    margin-bottom:40px;
+}
+
+.menu h3{
+    color:gold;
+    margin:40px 0 20px;
+    font-size:30px;
+}
+
+/* ==========================
+   Cards
+========================== */
+
+.cards{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:30px;
+}
+
+.card{
+    width:300px;
+    background:#1d0505;
+    color:#fff;
+    border:none;
+    border-radius:15px;
+    padding:20px;
+    transition:.3s;
+    box-shadow:0 5px 15px rgba(0,0,0,.3);
+}
+
+.card:hover{
+    transform:translateY(-10px);
+}
+
+.card img{
+    width:100%;
+    border-radius:10px;
+}
+
+.card h3{
+    margin-top:20px;
+    color:gold;
+}
+
+.card p{
+    margin:15px 0;
+    font-size:20px;
+}
+
+.card button{
+    width:100%;
+}
+/* ==========================
+   About Section
+========================== */
+
+.about{
+    padding:80px 20px;
+    text-align:center;
+}
+
+.about h1{
+    color:gold;
+    font-size:45px;
+    margin-bottom:30px;
+}
+
+.about p{
+    max-width:900px;
+    margin:auto;
+    font-size:20px;
+    line-height:1.8;
+}
+
+/* ==========================
+   Contact Section
+========================== */
+
+.contact{
+    padding:80px 20px;
+    text-align:center;
+}
+
+.contact h1{
+    color:gold;
+    font-size:45px;
+    margin-bottom:40px;
+}
+
+.contact form{
+    width:500px;
+    max-width:100%;
+    margin:auto;
+}
+
+.contact input,
+.contact textarea{
+    width:100%;
+    padding:15px;
+    margin:15px 0;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+}
+
+.contact textarea{
+    height:150px;
+    resize:none;
+}
+
+.contact button{
+    width:100%;
+}
+
+/* ==========================
+   Cart Section
+========================== */
+
+.cart{
+    width:90%;
+    max-width:900px;
+    margin:40px auto;
+    background:#1d0505;
+    padding:25px;
+    border-radius:12px;
+}
+
+.cart h2,
+.cart h3{
+    color:gold;
+}
+
+.cart ul{
+    list-style:none;
+    padding:0;
+}
+
+.cart li{
+    padding:12px;
+    border-bottom:1px solid #555;
+}
+
+/* ==========================
+   Checkout Section
+========================== */
+
+.checkout{
+    padding:80px 20px;
+    text-align:center;
+}
+
+.checkout h1{
+    color:gold;
+    font-size:45px;
+    margin-bottom:30px;
+}
+
+.checkout form{
+    width:500px;
+    max-width:100%;
+    margin:auto;
+}
+
+.checkout input,
+.checkout textarea{
+    width:100%;
+    padding:15px;
+    margin:15px 0;
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+}
+
+.checkout textarea{
+    height:120px;
+    resize:none;
+}
+
+.checkout button{
+    width:100%;
+}
+
+/* ==========================
+   Footer
+========================== */
+
+footer{
+    background:#1b0505;
+    color:white;
+    text-align:center;
+    padding:40px 20px;
+    margin-top:80px;
+}
+
+.footer-content h2{
+    color:gold;
+    margin-bottom:15px;
+}
+
+.footer-content p{
+    margin:8px 0;
+    font-size:18px;
+}
+
+/* ==========================
+   Responsive Design
+========================== */
+
+@media (max-width:768px){
+
+    .hero{
+        flex-direction:column;
+        text-align:center;
+        padding:40px 20px;
+    }
+
+    .hero-text,
+    .hero-image{
+        width:100%;
+    }
+
+    .hero-text h1{
+        font-size:38px;
+    }
+
+    .hero-text p{
+        font-size:18px;
+    }
+
+    .hero-image img{
+        width:300px;
+        margin:30px auto 0;
+    }
+
+    .menu{
+        padding:50px 20px;
+    }
+
+    .menu h2{
+        font-size:32px;
+    }
+
+    .menu h3{
+        font-size:24px;
+    }
+
+    .cards{
+        gap:20px;
+    }
+
+    .card{
+        width:100%;
+        max-width:350px;
+    }
+
+    .about,
+    .contact,
+    .checkout{
+        padding:50px 20px;
+    }
+
+    .about h1,
+    .contact h1,
+    .checkout h1{
+        font-size:34px;
+    }
+
+    .about p{
+        font-size:18px;
+    }
+
+    footer{
+        padding:30px 15px;
+    }
+}
+/* ==========================
+   Cart Page Fix
+========================== */
+
+.cart-card{
+    width:100% !important;
+    max-width:none !important;
+    background:white !important;
+    color:#111 !important;
+}
+
+
+.food-card{
+    width:100% !important;
+    max-width:none !important;
+    background:white !important;
+    color:#111 !important;
+}
+
+
+.cart-food-image{
+
+    width:220px !important;
+    height:220px !important;
+    object-fit:cover;
+    border-radius:20px;
+
+}
+
+
+.food-card h2,
+.food-card h3,
+.food-card h4{
+
+    color:#111 !important;
+
+}
+
+
+@media(max-width:768px){
+
+.cart-food-image{
+
+    width:140px !important;
+    height:140px !important;
+
+}
+
+}
+/* ==========================
+   FINAL CART DESIGN FIX
+========================== */
+
+
+.cart-container{
+    max-width:1000px !important;
+}
+
+
+.cart-card{
+    width:100% !important;
+    max-width:100% !important;
+    background:white !important;
+    color:#111 !important;
+}
+
+
+.food-card{
+
+    width:100% !important;
+    max-width:100% !important;
+
+    background:white !important;
+    color:#111 !important;
+
+    padding:25px !important;
+
+    display:flex !important;
+    align-items:center !important;
+
+}
+
+
+
+
+.cart-food-image{
+
+    width:180px !important;
+    height:180px !important;
+
+    object-fit:cover !important;
+
+    border-radius:20px !important;
+
+    flex-shrink:0 !important;
+
+}
+
+
+
+
+
+.food-info{
+
+    flex:1 !important;
+
+}
+
+
+
+
+
+.food-info h5{
+
+    font-size:28px !important;
+
+    color:#111 !important;
+
+    white-space:nowrap !important;
+
+}
+
+
+
+
+
+.food-info p{
+
+    font-size:22px !important;
+
+}
+
+
+
+
+
+@media(max-width:768px){
+
+
+.food-card{
+
+    flex-direction:column !important;
+
+    text-align:center !important;
+
+}
+
+
+
+.cart-food-image{
+
+    width:140px !important;
+
+    height:140px !important;
+
+}
+
+
+
+.food-info h5{
+
+    white-space:normal !important;
+
+    font-size:22px !important;
+
+}
+
+
+}
+/* Checkout Product Name Fix */
+
+#order-summary .d-flex{
+    display:flex !important;
+    flex-direction:row !important;
+    justify-content:space-between !important;
+    align-items:center !important;
+    width:100%;
+}
+
+
+#order-summary h5{
+
+    width:auto !important;
+    max-width:250px;
+
+    white-space:nowrap !important;
+    overflow:visible !important;
+
+    font-size:22px !important;
+    color:#111 !important;
+
+}
+
+
+#order-summary div{
+
+    min-width:0;
+
+}
+
+
+#order-summary b{
+
+    white-space:nowrap;
+
+}
+
+
+
+@media(max-width:768px){
+
+#order-summary .d-flex{
+
+    flex-direction:row !important;
+
+}
+
+
+#order-summary h5{
+
+    font-size:18px !important;
+    white-space:normal !important;
+
+}
+
+}
+.order-item{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    width:100%;
+
+}
+
+
+.order-name h5{
+
+    color:#111 !important;
+    font-size:22px;
+    white-space:nowrap;
+
+}
+
+
+.order-name p{
+
+    color:#555;
+    margin:0;
+
+}
+
+
+.order-price{
+
+    color:#198754;
+    font-weight:bold;
+    font-size:18px;
+    white-space:nowrap;
+
+}
+
+
+@media(max-width:600px){
+
+.order-name h5{
+
+    font-size:18px;
+
+}
+
+}
+/* ==========================
+   CHECKOUT SUMMARY FINAL FIX
+========================== */
+
+
+#order-summary{
+
+    width:100%;
+    overflow:hidden;
+
+}
+
+
+
+.order-item{
+
+    display:flex !important;
+    justify-content:space-between !important;
+    align-items:center !important;
+
+    width:100% !important;
+
+    gap:30px;
+
+    padding:15px 0;
+
+}
+
+
+
+
+.order-item > div:first-child{
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+
+
+
+.order-item h5{
+
+    color:#111 !important;
+
+    font-size:22px !important;
+
+    font-weight:700;
+
+    margin:0;
+
+    white-space:nowrap !important;
+
+}
+
+
+
+
+.order-item p{
+
+    color:#555 !important;
+
+    margin:5px 0 0;
+
+}
+
+
+
+
+.order-item b{
+
+    color:#198754 !important;
+
+    font-size:18px;
+
+    white-space:nowrap;
+
+}
+
+
+
+
+
+
+@media(max-width:600px){
+
+
+.order-item h5{
+
+    white-space:normal !important;
+
+    font-size:18px !important;
+
+}
+
+
+
+}
+/* ==========================
+   CHECKOUT FULL SCREEN FIX
+========================== */
+
+
+#order-summary .order-item{
+
+    display:flex !important;
+
+    justify-content:space-between !important;
+
+    align-items:center !important;
+
+    width:100% !important;
+
+}
+
+
+
+#order-summary .order-name{
+
+    flex:1 !important;
+
+    min-width:300px !important;
+
+}
+
+
+
+#order-summary .order-name h5{
+
+    white-space:nowrap !important;
+
+    overflow:visible !important;
+
+    text-overflow:clip !important;
+
+    width:auto !important;
+
+    max-width:none !important;
+
+    font-size:24px !important;
+
+}
+
+
+
+#order-summary .order-price{
+
+    flex-shrink:0 !important;
+
+    margin-left:30px;
+
+}
+
+
+
+@media(max-width:768px){
+
+#order-summary .order-name{
+
+    min-width:0 !important;
+
+}
+
+
+#order-summary .order-name h5{
+
+    white-space:normal !important;
+
+    font-size:20px !important;
+
+}
+
+}
+#order-summary{
+    width:100%;
+}
+
+
+.order-item{
+    display:flex !important;
+    justify-content:space-between !important;
+    align-items:center !important;
+    width:100% !important;
+}
+
+
+.order-name{
+    flex:1;
+}
+
+
+.order-name h5{
+    white-space:nowrap !important;
+    font-size:24px !important;
+}
+
+
+.order-price{
+    margin-left:40px;
+    white-space:nowrap;
+}

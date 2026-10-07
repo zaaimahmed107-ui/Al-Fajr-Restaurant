@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Menu | Al Fajr Restaurant</title>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+<style>
+
+body{
+
+background:#111;
+
+color:white;
+
+font-family:Arial,sans-serif;
+
+}
+
+
+
+.navbar{
+
+background:#000 !important;
+
+}
+
+
+
+.navbar-brand{
+
+font-size:24px;
+
+}
+
+
+
+.nav-link{
+
+color:white !important;
+
+}
+
+
+
+.nav-link:hover,
+.nav-link.active{
+
+color:#ffc107 !important;
+
+}
+
+
+
+.menu-title{
+
+font-size:45px;
+
+font-weight:bold;
+
+text-align:center;
+
+margin:50px 0;
+
+}
+
+
+
+.gold{
+
+color:#ffc107;
+
+}
+
+
+
+
+.food-card{
+
+background:#1b1b1b;
+
+border:1px solid #ffc107;
+
+border-radius:20px;
+
+overflow:hidden;
+
+height:100%;
+
+transition:0.3s;
+
+}
+
+
+
+.food-card:hover{
+
+transform:translateY(-10px);
+
+box-shadow:0 15px 30px rgba(255,193,7,0.35);
+
+}
+
+
+
+
+.food-card img{
+
+width:100%;
+
+height:260px;
+
+object-fit:cover;
+
+}
+
+
+
+.food-body{
+
+padding:20px;
+
+text-align:center;
+
+}
+
+
+
+.category{
+
+display:inline-block;
+
+background:#ffc107;
+
+color:black;
+
+font-weight:bold;
+
+padding:5px 15px;
+
+border-radius:20px;
+
+font-size:14px;
+
+}
+
+
+
+.food-body h3{
+
+margin-top:15px;
+
+}
+
+
+
+.price{
+
+color:#ffc107;
+
+font-size:24px;
+
+font-weight:bold;
+
+}
+
+
+
+.btn-gold{
+
+background:#ffc107;
+
+color:black;
+
+font-weight:bold;
+
+border-radius:30px;
+
+padding:10px 30px;
+
+border:none;
+
+}
+
+
+
+.btn-gold:hover{
+
+background:#ffda6a;
+
+transform:scale(1.05);
+
+}
+
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar navbar-expand-lg navbar-dark">
+
+<div class="container">
+
+
+<a class="navbar-brand d-flex align-items-center" href="index.html">
+
+<img src="images/logo.png"
+width="45"
+height="45"
+class="me-2 rounded-circle">
+
+<span class="fw-bold text-warning">
+
+AL FAJR RESTAURANT
+
+</span>
+
+</a>
+
+
+
+<button class="navbar-toggler"
+type="button"
+data-bs-toggle="collapse"
+data-bs-target="#navbarNav">
+
+<span class="navbar-toggler-icon"></span>
+
+</button>
+
+
+<div class="collapse navbar-collapse" id="navbarNav">
+
+
+<ul class="navbar-nav ms-auto">
+
+
+<li class="nav-item">
+<a class="nav-link" href="index.html">Home</a>
+</li>
+
+
+<li class="nav-item">
+<a class="nav-link active" href="menu.html">Menu</a>
+</li>
+
+
+<li class="nav-item">
+<a class="nav-link" href="about.html">About</a>
+</li>
+
+
+<li class="nav-item">
+<a class="nav-link" href="contact.html">Contact</a>
+</li>
+
+
+<li class="nav-item">
+<a class="nav-link" href="cart.html">🛒 Cart</a>
+</li>
+
+
+<li class="nav-item">
+<a class="nav-link" href="track-order.html">📦 Track Order</a>
+</li>
+
+
+</ul>
+
+
+</div>
+
+
+</div>
+
+</nav>
+
+
+
+<h1 class="menu-title">
+
+Our <span class="gold">Menu</span> 🍽️
+
+</h1>
+
+
+
+<div class="container">
+
+<div class="row" id="menuContainer">
+
+</div>
+
+</div>
+<script>
+
+
+// ==========================
+// LOAD FOOD FROM DATABASE
+// ==========================
+
+
+async function loadMenu(){
+
+
+try{
+
+
+let response = await fetch(
+"http://localhost:5000/foods"
+);
+
+
+
+let foods = await response.json();
+
+
+
+let container = document.getElementById("menuContainer");
+
+
+container.innerHTML="";
+
+
+
+foods.forEach(food=>{
+
+
+
+container.innerHTML += `
+
+
+
+<div class="col-lg-4 col-md-6 mb-4">
+
+
+<div class="food-card">
+
+
+
+<img src="${food.image}" alt="${food.name}">
+
+
+
+<div class="food-body">
+
+
+<span class="category">
+
+${food.category}
+
+</span>
+
+
+
+<h3>
+
+${food.name}
+
+</h3>
+
+
+
+<div class="price">
+
+Rs.${food.price}
+
+</div>
+
+
+
+<button class="btn btn-gold mt-3"
+
+onclick="addToCart(
+
+'${food._id}',
+
+'${food.name}',
+
+${food.price},
+
+'${food.image}'
+
+)">
+
+
+Add To Cart 🛒
+
+
+</button>
+
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+`;
+
+
+
+});
+
+
+}
+
+catch(error){
+
+
+console.log(error);
+
+
+}
+
+
+
+}
+
+
+
+
+
+// ==========================
+// ADD TO CART
+// ==========================
+
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+
+
+
+function addToCart(id,name,price,image){
+
+
+
+let item = cart.find(product=>product.id===id);
+
+
+
+if(item){
+
+
+item.quantity++;
+
+
+}
+
+else{
+
+
+cart.push({
+
+id:id,
+
+name:name,
+
+price:price,
+
+image:image,
+
+quantity:1
+
+});
+
+
+}
+
+
+
+localStorage.setItem(
+
+"cart",
+
+JSON.stringify(cart)
+
+);
+
+
+
+alert("Food Added To Cart 🛒");
+
+
+
+}
+
+
+
+
+loadMenu();
+
+
+
+</script>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+
+<!-- FOOTER -->
+
+
+<footer class="bg-dark text-white text-center py-4 mt-5">
+
+
+<img src="images/logo.png"
+width="60"
+height="60"
+class="rounded-circle mb-2">
+
+
+<h4 class="text-warning">
+
+🍔 AL FAJR RESTAURANT
+
+</h4>
+
+
+
+<p>
+
+Fresh Food • Fast Delivery
+
+</p>
+
+
+
+<p>
+
+📞 0300-0000000
+
+<br>
+
+📍 Hyderabad
+
+</p>
+
+
+
+<hr class="mx-5">
+
+
+
+<p class="mb-0">
+
+© 2026 Al Fajr Restaurant. All Rights Reserved.
+
+</p>
+
+
+
+</footer>
+
+
+
+</body>
+
+</html>

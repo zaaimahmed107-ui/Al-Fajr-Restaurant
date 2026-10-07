@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Al Fajr Admin Dashboard</title>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+
+<style>
+
+
+body{
+
+background:#f5f5f5;
+
+}
+
+
+
+.sidebar{
+
+min-height:100vh;
+
+background:#111;
+
+}
+
+
+
+.sidebar h3{
+
+letter-spacing:1px;
+
+}
+
+
+
+.sidebar .nav-link{
+
+color:white;
+
+padding:12px;
+
+margin:8px 0;
+
+border-radius:10px;
+
+transition:0.3s;
+
+}
+
+
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active{
+
+background:#ffc107;
+
+color:black;
+
+}
+
+
+
+
+
+.dashboard-card{
+
+border:none;
+
+border-radius:20px;
+
+padding:25px;
+
+transition:0.3s;
+
+}
+
+
+
+.dashboard-card:hover{
+
+transform:translateY(-5px);
+
+}
+
+
+
+.icon{
+
+font-size:35px;
+
+color:#ffc107;
+
+}
+
+
+
+.card{
+
+border:none;
+
+border-radius:20px;
+
+overflow:hidden;
+
+}
+
+
+
+.table img{
+
+border-radius:10px;
+
+object-fit:cover;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+
+<div class="container-fluid">
+
+
+<div class="row">
+
+
+
+
+
+<!-- SIDEBAR -->
+
+
+<div class="col-lg-2 sidebar p-3">
+
+
+
+<h3 class="text-warning">
+
+🍔 AL FAJR
+
+</h3>
+
+
+
+<p class="text-white">
+
+Admin Panel
+
+</p>
+
+
+
+<hr class="text-white">
+
+
+
+
+
+
+<ul class="nav flex-column">
+
+
+
+<li class="nav-item">
+
+<a class="nav-link active" href="admin.html">
+
+<i class="bi bi-speedometer2"></i>
+
+Dashboard
+
+</a>
+
+</li>
+
+
+
+
+<li class="nav-item">
+
+<a class="nav-link" href="#orders">
+
+<i class="bi bi-basket"></i>
+
+Orders
+
+</a>
+
+</li>
+
+
+
+
+<li class="nav-item">
+
+<a class="nav-link" href="add-food.html">
+
+<i class="bi bi-plus-circle"></i>
+
+Add Food
+
+</a>
+
+</li>
+
+
+
+
+<li class="nav-item">
+
+<a class="nav-link" href="#" onclick="logout()">
+
+<i class="bi bi-box-arrow-right"></i>
+
+Logout
+
+</a>
+
+</li>
+
+
+
+</ul>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- MAIN CONTENT -->
+
+
+<div class="col-lg-10 p-4">
+
+
+
+<h2>
+
+Dashboard 📊
+
+</h2>
+
+
+
+<p class="text-muted">
+
+Welcome back Admin 👋
+
+</p>
+
+
+
+
+
+
+
+<!-- DASHBOARD CARDS -->
+
+
+
+<div class="row">
+
+
+
+
+
+<div class="col-md-4 mb-3">
+
+
+<div class="card shadow dashboard-card text-center">
+
+
+<div class="icon">
+
+<i class="bi bi-bag-check"></i>
+
+</div>
+
+
+
+<h5>
+
+Total Orders
+
+</h5>
+
+
+<h2 id="totalOrders">
+
+0
+
+</h2>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="col-md-4 mb-3">
+
+
+<div class="card shadow dashboard-card text-center">
+
+
+<div class="icon">
+
+<i class="bi bi-people"></i>
+
+</div>
+
+
+
+<h5>
+
+Customers
+
+</h5>
+
+
+
+<h2 id="totalCustomers">
+
+0
+
+</h2>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="col-md-4 mb-3">
+
+
+<div class="card shadow dashboard-card text-center">
+
+
+<div class="icon">
+
+<i class="bi bi-currency-dollar"></i>
+
+</div>
+
+
+
+<h5>
+
+Revenue
+
+</h5>
+
+
+
+<h2 id="totalRevenue">
+
+Rs.0
+
+</h2>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ORDERS -->
+
+
+<div class="card shadow mt-4" id="orders">
+
+
+
+<div class="card-header bg-dark text-white">
+
+
+<h4>
+
+Recent Orders 📦
+
+</h4>
+
+
+</div>
+
+
+
+
+<div class="card-body">
+
+
+
+<div class="table-responsive">
+
+
+<table class="table table-hover">
+
+
+
+<thead>
+
+
+<tr>
+
+
+<th>
+
+Customer
+
+</th>
+
+
+<th>
+
+Phone
+
+</th>
+
+
+<th>
+
+Food
+
+</th>
+
+
+<th>
+
+Total
+
+</th>
+
+
+<th>
+
+Status
+
+</th>
+
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+<tbody id="orderTable">
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+<!-- FOOD MANAGEMENT -->
+
+
+<div class="card shadow mt-4">
+
+
+<div class="card-header bg-dark text-white">
+
+
+<h4>
+
+Manage Food Items 🍔
+
+</h4>
+
+
+</div>
+
+
+
+
+<div class="card-body">
+
+
+
+<div class="table-responsive">
+
+
+<table class="table table-hover">
+
+
+
+<thead>
+
+
+<tr>
+
+<th>
+
+Image
+
+</th>
+
+
+<th>
+
+Name
+
+</th>
+
+
+<th>
+
+Price
+
+</th>
+
+
+<th>
+
+Category
+
+</th>
+
+
+<th>
+
+Action
+
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+<tbody id="foodTable">
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<footer class="text-center mt-5">
+
+
+<hr>
+
+
+<p class="text-secondary">
+
+© 2026 Al Fajr Restaurant Admin Panel
+
+</p>
+
+
+</footer>
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<script>
+
+
+// ADMIN LOGIN CHECK
+
+
+if(localStorage.getItem("adminLogin") !== "true"){
+
+
+window.location.href="admin-login.html";
+
+
+}
+
+
+
+
+
+function logout(){
+
+
+localStorage.removeItem("adminLogin");
+
+
+window.location.href="admin-login.html";
+
+
+}
+
+
+
+
+
+
+
+// LOAD ORDERS
+
+
+async function loadOrders(){
+
+
+try{
+
+
+
+let response = await fetch(
+
+"http://localhost:5000/orders"
+
+);
+
+
+
+let orders = await response.json();
+
+
+
+
+let table = document.getElementById("orderTable");
+
+
+table.innerHTML="";
+
+
+
+
+let revenue = 0;
+
+
+let customers = new Set();
+
+
+
+
+
+orders.forEach(order=>{
+
+
+
+let foods = order.items.map(
+
+item=>item.name
+
+).join(", ");
+
+
+
+
+
+table.innerHTML += `
+
+
+
+<tr>
+
+
+<td>
+
+${order.customerName}
+
+</td>
+
+
+
+<td>
+
+${order.customerPhone}
+
+</td>
+
+
+
+<td>
+
+${foods}
+
+</td>
+
+
+
+<td>
+
+Rs. ${order.total}
+
+</td>
+
+
+
+<td>
+
+
+
+<select class="form-select"
+
+onchange="updateStatus('${order._id}',this.value)">
+
+
+
+<option value="Pending"
+
+${order.status=="Pending"?"selected":""}>
+
+Pending
+
+</option>
+
+
+
+<option value="Preparing"
+
+${order.status=="Preparing"?"selected":""}>
+
+Preparing
+
+</option>
+
+
+
+<option value="Delivered"
+
+${order.status=="Delivered"?"selected":""}>
+
+Delivered
+
+</option>
+
+
+
+</select>
+
+
+
+</td>
+
+
+
+</tr>
+
+
+`;
+
+
+
+
+revenue += order.total;
+
+
+customers.add(order.customerPhone);
+
+
+
+});
+
+
+
+
+
+document.getElementById("totalOrders").innerHTML = orders.length;
+
+
+document.getElementById("totalCustomers").innerHTML = customers.size;
+
+
+document.getElementById("totalRevenue").innerHTML = "Rs. "+revenue;
+
+
+
+}
+
+
+
+catch(error){
+
+
+console.log(error);
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+// UPDATE STATUS
+
+
+async function updateStatus(id,status){
+
+
+
+await fetch(
+
+"http://localhost:5000/orders/"+id,
+
+{
+
+
+method:"PUT",
+
+
+headers:{
+
+
+"Content-Type":"application/json"
+
+
+},
+
+
+body:JSON.stringify({
+
+
+status:status
+
+
+})
+
+
+}
+
+
+);
+
+
+
+alert("Order Status Updated ✅");
+
+
+loadOrders();
+
+
+}
+
+
+
+
+
+
+
+
+
+
+// LOAD FOOD
+
+
+async function loadFoodsAdmin(){
+
+
+
+try{
+
+
+
+let response = await fetch(
+
+"http://localhost:5000/foods"
+
+);
+
+
+
+let foods = await response.json();
+
+
+
+let table = document.getElementById("foodTable");
+
+
+
+table.innerHTML="";
+
+
+
+
+
+foods.forEach(food=>{
+
+
+
+table.innerHTML += `
+
+
+
+<tr>
+
+
+
+<td>
+
+<img src="${food.image}"
+
+width="60"
+
+height="60">
+
+</td>
+
+
+
+<td>
+
+${food.name}
+
+</td>
+
+
+
+<td>
+
+Rs.${food.price}
+
+</td>
+
+
+
+<td>
+
+${food.category}
+
+</td>
+
+
+
+<td>
+
+
+<button class="btn btn-danger btn-sm"
+
+onclick="deleteFood('${food._id}')">
+
+
+Delete
+
+
+</button>
+
+
+
+</td>
+
+
+
+</tr>
+
+
+
+`;
+
+
+
+});
+
+
+
+}
+
+
+
+catch(error){
+
+
+console.log(error);
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+// DELETE FOOD
+
+
+async function deleteFood(id){
+
+
+
+if(confirm("Delete food item?")){
+
+
+await fetch(
+
+"http://localhost:5000/foods/"+id,
+
+{
+
+
+method:"DELETE"
+
+
+}
+
+
+);
+
+
+
+loadFoodsAdmin();
+
+
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+loadOrders();
+
+
+loadFoodsAdmin();
+
+
+
+</script>
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+</body>
+
+</html>
