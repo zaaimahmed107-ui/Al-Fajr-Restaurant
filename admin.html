@@ -911,10 +911,10 @@ console.log(error);
 
 async function updateStatus(id,status){
 
+await fetch(
+"https://al-fajr-restaurant-production.up.railway.app/orders/"+id,
+{
 
-
-await fetch("https://al-fajr-restaurant-production.up.railway.app/orders/"+id,{
-    
 method:"PUT",
 
 headers:{
@@ -925,42 +925,14 @@ body:JSON.stringify({
 status:status
 })
 
-});
-
-
-headers:{
-
-
-"Content-Type":"application/json"
-
-
-},
-
-
-body:JSON.stringify({
-
-
-status:status
-
-
-})
-
-
 }
-
-
 );
-
-
 
 alert("Order Status Updated ✅");
 
-
 loadOrders();
 
-
 }
-
 
 
 
