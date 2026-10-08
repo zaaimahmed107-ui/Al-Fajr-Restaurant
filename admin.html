@@ -913,11 +913,7 @@ async function updateStatus(id,status){
 
 
 
-await fetch(
-
-"http://localhost:5000/orders/"+id,
-
-{
+await fetch("https://al-fajr-restaurant-production.up.railway.app/foods")
 
 
 method:"PUT",
@@ -978,7 +974,7 @@ try{
 
 let response = await fetch(
 
-"http://localhost:5000/foods"
+"https://al-fajr-restaurant-production.up.railway.app/foods")
 
 );
 
