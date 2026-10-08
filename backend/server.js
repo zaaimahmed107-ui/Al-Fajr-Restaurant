@@ -2,14 +2,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-
 const app = express();
 
 
+// Middleware
 app.use(cors());
-
 app.use(express.json());
-
 
 
 
@@ -18,7 +16,7 @@ app.use(express.json());
 // ==========================
 
 
-mongoose.connect("mongodb://127.0.0.1:27017/alfajr")
+mongoose.connect("mongodb+srv://zaaimahmed107_db_user:Zalim1078@cluster0.k2lbfds.mongodb.net/alfajr?appName=Cluster0")
 
 .then(()=>{
 
@@ -28,14 +26,9 @@ mongoose.connect("mongodb://127.0.0.1:27017/alfajr")
 
 .catch((err)=>{
 
-    console.log(err);
+    console.log("MongoDB Error:", err);
 
 });
-
-
-
-
-
 
 
 
@@ -47,22 +40,21 @@ mongoose.connect("mongodb://127.0.0.1:27017/alfajr")
 
 const foodSchema = new mongoose.Schema({
 
+    name:{
+        type:String,
+        required:true
+    },
 
-    name:String,
-
-
-    price:Number,
-
+    price:{
+        type:Number,
+        required:true
+    },
 
     category:String,
 
-
     image:String
 
-
-
 });
-
 
 
 const Food = mongoose.model("Food", foodSchema);
@@ -70,74 +62,37 @@ const Food = mongoose.model("Food", foodSchema);
 
 
 
-
-
-
-
-
 // ==========================
-// ORDER SCHEMA (UPDATED)
+// ORDER SCHEMA
 // ==========================
 
 
 const orderSchema = new mongoose.Schema({
 
-
     customerName:String,
-
 
     customerPhone:String,
 
-
     customerAddress:String,
-
-
 
     items:Array,
 
-
-
     total:Number,
 
-
-
     status:{
-
-
         type:String,
-
-
         default:"Pending"
-
-
     },
 
-
-
     date:{
-
-
         type:Date,
-
-
         default:Date.now
-
-
     }
-
-
 
 });
 
 
-
-
 const Order = mongoose.model("Order", orderSchema);
-
-
-
-
-
 
 
 
@@ -149,86 +104,57 @@ const Order = mongoose.model("Order", orderSchema);
 
 app.get("/",(req,res)=>{
 
-
     res.send("🍔 Al Fajr Restaurant Server Running");
 
-
 });
-
-
 // ==========================
 // FOOD ROUTES
 // ==========================
-
 
 
 // GET ALL FOODS
 
 app.get("/foods", async(req,res)=>{
 
-
     try{
-
 
         const foods = await Food.find();
 
-
         res.json(foods);
-
-
 
     }catch(err){
 
-
         res.status(500).json({
-
             message:err.message
-
         });
-
 
     }
 
-
 });
-
-
-
 
 
 
 
 // ADD FOOD
 
-
 app.post("/foods", async(req,res)=>{
-
 
     try{
 
-
         const food = new Food(req.body);
-
 
         await food.save();
 
-
-
         res.json({
-
 
             message:"Food Added Successfully",
 
-
             food
-
 
         });
 
 
-
     }catch(err){
-
 
         res.status(500).json({
 
@@ -236,34 +162,23 @@ app.post("/foods", async(req,res)=>{
 
         });
 
-
     }
-
 
 });
 
 
 
 
-
-
-
-
 // DELETE FOOD
-
 
 app.delete("/foods/:id", async(req,res)=>{
 
-
 try{
-
 
 const food = await Food.findByIdAndDelete(req.params.id);
 
 
-
 if(!food){
-
 
 return res.status(404).json({
 
@@ -271,9 +186,7 @@ message:"Food not found"
 
 });
 
-
 }
-
 
 
 res.json({
@@ -281,7 +194,6 @@ res.json({
 message:"Food Deleted Successfully"
 
 });
-
 
 
 }catch(err){
@@ -302,13 +214,7 @@ message:err.message
 
 
 
-
-
-
-
-
 // UPDATE FOOD
-
 
 app.put("/foods/:id", async(req,res)=>{
 
@@ -318,15 +224,11 @@ try{
 
 const food = await Food.findByIdAndUpdate(
 
-
 req.params.id,
-
 
 req.body,
 
-
 {new:true}
-
 
 );
 
@@ -334,13 +236,11 @@ req.body,
 
 if(!food){
 
-
 return res.status(404).json({
 
 message:"Food not found"
 
 });
-
 
 }
 
@@ -352,7 +252,6 @@ message:"Food Updated Successfully",
 
 food
 
-
 });
 
 
@@ -370,12 +269,7 @@ message:err.message
 }
 
 
-
 });
-
-
-
-
 
 
 
@@ -387,10 +281,7 @@ message:err.message
 
 
 
-
-
 // SAVE ORDER
-
 
 app.post("/orders", async(req,res)=>{
 
@@ -407,13 +298,9 @@ await order.save();
 
 res.json({
 
-
 message:"Order Saved Successfully",
 
-
 order
-
-
 
 });
 
@@ -438,12 +325,7 @@ message:err.message
 
 
 
-
-
-
-
 // GET ALL ORDERS
-
 
 app.get("/orders", async(req,res)=>{
 
@@ -478,13 +360,20 @@ message:err.message
 
 });
 
-// GET SINGLE ORDER BY ID (TRACK ORDER)
+
+
+
+
+// GET SINGLE ORDER
 
 app.get("/orders/:id", async(req,res)=>{
 
+
 try{
 
+
 const order = await Order.findById(req.params.id);
+
 
 
 if(!order){
@@ -498,7 +387,9 @@ message:"Order not found"
 }
 
 
+
 res.json(order);
+
 
 
 }catch(err){
@@ -520,10 +411,7 @@ message:err.message
 
 
 
-
-
 // UPDATE ORDER STATUS
-
 
 app.put("/orders/:id", async(req,res)=>{
 
@@ -571,12 +459,9 @@ message:"Order not found"
 
 res.json({
 
-
 message:"Status Updated Successfully",
 
-
 order
-
 
 });
 
@@ -595,30 +480,19 @@ message:err.message
 }
 
 
-
 });
-
-
-
-
-
-
-
-
-
-
-
-
 // ==========================
 // SERVER START
 // ==========================
 
 
+const PORT = process.env.PORT || 5000;
 
-app.listen(5000,()=>{
+
+app.listen(PORT,()=>{
 
 
-console.log("🚀 Server running on http://localhost:5000");
+console.log(`🚀 Server running on port ${PORT}`);
 
 
 });

@@ -466,37 +466,31 @@ Recent Orders 📦
 
 
 <th>
-
 Customer
-
 </th>
 
-
 <th>
-
 Phone
-
 </th>
 
+<th>
+Address
+</th>
 
 <th>
-
 Food
-
 </th>
 
-
 <th>
-
 Total
-
 </th>
 
+<th>
+Date
+</th>
 
 <th>
-
 Status
-
 </th>
 
 
@@ -757,42 +751,60 @@ table.innerHTML += `
 
 
 
+
+
 <tr>
 
-
 <td>
-
 ${order.customerName}
-
 </td>
 
-
-
 <td>
-
 ${order.customerPhone}
-
 </td>
 
-
+<td>
+${order.customerAddress}
+</td>
 
 <td>
-
 ${foods}
-
 </td>
 
-
-
 <td>
-
 Rs. ${order.total}
+</td>
+
+<td>
+${new Date(order.date).toLocaleString()}
+</td>
+
+<td>
+
+<select class="form-select"
+onchange="updateStatus('${order._id}',this.value)">
+
+<option value="Pending"
+${order.status=="Pending"?"selected":""}>
+Pending
+</option>
+
+<option value="Preparing"
+${order.status=="Preparing"?"selected":""}>
+Preparing
+</option>
+
+<option value="Delivered"
+${order.status=="Delivered"?"selected":""}>
+Delivered
+</option>
+
+</select>
 
 </td>
 
+</tr>
 
-
-<td>
 
 
 
@@ -1037,13 +1049,22 @@ ${food.category}
 <td>
 
 
+<a 
+href="add-food.html?id=${food._id}"
+class="btn btn-warning btn-sm">
+
+<i class="bi bi-pencil"></i>
+
+Edit
+
+</a>
+
+
 <button class="btn btn-danger btn-sm"
 
 onclick="deleteFood('${food._id}')">
 
-
 Delete
-
 
 </button>
 

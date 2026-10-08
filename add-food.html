@@ -50,7 +50,7 @@ body{
 
 <div class="card-header bg-dark text-white">
 
-<h2>
+<h2 id="pageTitle">
 <i class="bi bi-plus-circle"></i>
 Add Food Item
 </h2>
@@ -207,7 +207,7 @@ class="btn btn-success">
 
 <i class="bi bi-check-circle"></i>
 
-Save Food
+<span id="saveText">Save Food</span>
 
 
 </button>
@@ -272,6 +272,61 @@ Dashboard
 
 <script>
 
+let editId = new URLSearchParams(window.location.search).get("id");
+
+
+// LOAD FOOD FOR EDIT
+
+async function loadFood(){
+
+if(!editId){
+    return;
+}
+
+
+let response = await fetch(
+"http://localhost:5000/foods"
+);
+
+
+let foods = await response.json();
+
+
+let food = foods.find(item => item._id === editId);
+
+
+if(food){
+
+
+document.getElementById("foodName").value = food.name;
+
+document.getElementById("price").value = food.price;
+
+document.getElementById("category").value = food.category;
+
+document.getElementById("image").value = food.image;
+
+
+
+document.getElementById("pageTitle").innerHTML =
+"✏️ Edit Food Item";
+
+
+document.getElementById("saveText").innerHTML =
+"Update Food";
+
+
+}
+
+
+}
+
+
+
+
+
+// ADD / UPDATE FOOD
+
 
 document
 .getElementById("foodForm")
@@ -305,17 +360,35 @@ document.getElementById("image").value
 
 
 
+let url =
+"http://localhost:5000/foods";
+
+
+let method = "POST";
+
+
+
+if(editId){
+
+
+url =
+"http://localhost:5000/foods/"+editId;
+
+
+method = "PUT";
+
+
+}
+
+
+
 
 try{
 
 
-let response = await fetch(
-"http://localhost:5000/foods",
-{
+let response = await fetch(url,{
 
-
-method:"POST",
-
+method:method,
 
 headers:{
 
@@ -323,56 +396,40 @@ headers:{
 
 },
 
-
 body:JSON.stringify(foodData)
-
 
 });
 
 
 
-let result = await response.json();
+await response.json();
 
 
 
-console.log(result);
+alert(
+editId ?
+"Food Updated Successfully ✅"
+:
+"Food Added Successfully ✅"
+);
 
 
 
-document
-.getElementById("message")
-.classList
-.remove("d-none");
-
-
-
-document
-.getElementById("error")
-.classList
-.add("d-none");
-
-
-
-document
-.getElementById("foodForm")
-.reset();
+window.location.href="admin.html";
 
 
 
 }
+
 
 
 catch(error){
 
 
+alert("Something went wrong ❌");
+
+
 console.log(error);
-
-
-
-document
-.getElementById("error")
-.classList
-.remove("d-none");
 
 
 }
@@ -381,6 +438,10 @@ document
 
 });
 
+
+
+
+loadFood();
 
 
 </script>
