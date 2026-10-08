@@ -913,10 +913,19 @@ async function updateStatus(id,status){
 
 
 
-await fetch("https://al-fajr-restaurant-production.up.railway.app/foods")
-
-
+await fetch("https://al-fajr-restaurant-production.up.railway.app/orders/"+id,{
+    
 method:"PUT",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+status:status
+})
+
+});
 
 
 headers:{
@@ -973,9 +982,7 @@ try{
 
 
 let response = await fetch(
-
-"https://al-fajr-restaurant-production.up.railway.app/foods")
-
+"https://al-fajr-restaurant-production.up.railway.app/foods"
 );
 
 
@@ -1116,18 +1123,10 @@ if(confirm("Delete food item?")){
 
 
 await fetch(
-
-https://al-fajr-restaurant-production.up.railway.app
-
+"https://al-fajr-restaurant-production.up.railway.app/foods/"+id,
 {
-
-
 method:"DELETE"
-
-
 }
-
-
 );
 
 
