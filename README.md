@@ -5,7 +5,7 @@ The system allows customers to browse food items, add items to cart, place order
 
 ## 🚀 Live Website
 
-(Add your GitHub Pages link here)
+https://zaaimahmed107-ui.github.io/Al-Fajr-Restaurant/
 
 ## ✨ Features
 
